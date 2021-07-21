@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>Blog List</title>
+    </head>
+    <body>
+        <div><label>제목: </label>{{post.postname}}</div>
+        <br/>
+        <label>내용: </label>
+        <br/>
+        <div>{{post.content}}</div>
+
+        <!-- 이미지 보여주기 -->
+        {% if post.photo %}
+            <div>
+            <img src = "{{ post.photo.url }}" alt="" height="600">
+            </div>
+        {% endif %}
+
+        <div>
+            <a href="{% url 'board:index' %}">목록</a>
+        </div>
+        <div class='delete_form'>
+        <form method="POST" action="{% url 'board:remove_post' post.pk %}">
+            {% csrf_token %}
+            <input type="submit" value="삭제">
+        </form>
+        </div>  
+    </body>
+</html>
